@@ -74,7 +74,7 @@ class UsuarioModel extends CI_Model {
 	function buscarDadosUsuario($id, $dados)
 	{ 
 		$this->db->select($dados);
-		$this->db->where('id', $id); 
+		$this->db->where('idUsuario', $id); 
 		$query = $this->db->get('Usuarios'); 
 		return $query->row_array();
 	}

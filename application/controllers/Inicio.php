@@ -19,7 +19,7 @@ class Inicio extends CI_Controller {
 		if(isset($usuario)){
 			#Se existir, registra na sessao e manda pra tela principal
 			// $this->session->userdata['logged_in'] = true;
-			$this->session->set_userdata('id', $usuario['Id']); 
+			$this->session->set_userdata('id', $usuario['IdUsuario']); 
 			redirect('Painel/principal');
 		}else{
 			#Se nao, manda novamente para a tela inicial

@@ -2,8 +2,8 @@
  * Base structure
  */
 
-/* Move down content because we have a fixed navbar that is 3.5rem tall */
-body {
+ /* Move down content because we have a fixed navbar that is 3.5rem tall */
+ body {
   padding-top: 3.5rem;
 }
 
@@ -11,7 +11,7 @@ body {
  * Typography
  */
 
-h1 {
+ h1 {
   padding-bottom: 9px;
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
@@ -21,7 +21,7 @@ h1 {
  * Sidebar
  */
 
-.sidebar {
+ .sidebar {
   position: fixed;
   top: 51px;
   bottom: 0;
@@ -53,8 +53,8 @@ h1 {
  * Dashboard
  */
 
-/* Placeholders */
-.placeholders {
+ /* Placeholders */
+ .placeholders {
   padding-bottom: 3rem;
 }
 
@@ -65,54 +65,63 @@ h1 {
 
 
 .hadcursor {
-    cursor: pointer;
+  cursor: pointer;
 
 }
 
-.TriSea-technologies-Switch > input[type="checkbox"] {
-    display: none;   
+.Checkbox-Switch > input[type="checkbox"] {
+  display: none;   
 }
 
-.TriSea-technologies-Switch > label {
-    cursor: pointer;
-    height: 0px;
-    position: relative; 
-    width: 40px;  
+.Checkbox-Switch > label {
+  cursor: pointer;
+  height: 0px;
+  position: relative; 
+  width: 40px;  
 }
 
-.TriSea-technologies-Switch > label::before {
-    background: rgb(170, 170, 170);
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position:absolute;
-    opacity: 0.6;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
+.Checkbox-Switch > label::before {
+  background: rgb(170, 170, 170);
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  content: '';
+  height: 16px;
+  margin-top: -8px;
+  position:absolute;
+  opacity: 0.6;
+  transition: all 0.4s ease-in-out;
+  width: 40px;
 }
-.TriSea-technologies-Switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
+.Checkbox-Switch > label::after {
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  content: '';
+  height: 24px;
+  left: -4px;
+  margin-top: -8px;
+  position: absolute;
+  top: -4px;
+  transition: all 0.3s ease-in-out;
+  width: 24px;
 }
-.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::before {
-    background: inherit;
-    background-color: #000;
- 
-}
-.TriSea-technologies-Switch > input[type="checkbox"]:checked + label::after {
-    background: inherit;
-    left: 20px;
-    background-color: #323232;
+.Checkbox-Switch > input[type="checkbox"]:checked + label::before {
+  background: inherit;
+  background-color: #13E868;
 
+}
+.Checkbox-Switch > input[type="checkbox"]:checked + label::after {
+  background: inherit;
+  left: 20px;
+  background-color: #13E868;
+
+}
+
+.add-button{
+  z-index: 100; 
+  position: absolute;
+  right: 12px; 
+  bottom: 12px;
+  padding: 0.5rem 1.0rem;
+  font-size: 2.0rem;
 }

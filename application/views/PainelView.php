@@ -38,14 +38,14 @@
 					</li>
 				</ul>
 				<div class="btn-group">
-        <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         <i class="fa fa-user" aria-hidden="true"></i> Usuario
-       </button>
-       <div class="dropdown-menu dropdown-menu-right" style="right:0;left:auto;">
-         <button id="editarPerfil" class="dropdown-item text-dark" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Meu Perfil</button>
-         <a href="<?php echo base_url('index.php/Painel/desconectar'); ?>"><button class="dropdown-item text-dark" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</button></a>
-       </div>
-     </div>
+					<button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-user" aria-hidden="true"></i> <?php echo $this->data['Usuario']['Nome']; ?>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" style="right:0;left:auto;">
+						<button id="editarPerfil" class="dropdown-item text-dark" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Meu Perfil</button>
+						<a href="<?php echo base_url('index.php/Painel/desconectar'); ?>"><button class="dropdown-item text-dark" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</button></a>
+					</div>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -61,7 +61,7 @@
 						<a class="nav-link btn-light" href="#">Despesas</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link btn-light" href="#">Fornecedores</a>
+						<a class="nav-link btn-light" href="#">Favorecidos</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link btn-light" href="#">Formas de Pagamento</a>
@@ -100,131 +100,73 @@
 
 				<h2>Despesas</h2>
 				<div class="table-responsive">
-					<table id="despesas" class="table table-striped">
+					<table id="despesas" class="table  table-hover">
 						<thead>
 							<tr>
-								<th onclick="sortTable(0)" class="btn-light hadcursor">#</th>
-								<th onclick="sortTable(1)" class="btn-light hadcursor">Header</th>
-								<th onclick="sortTable(2)" class="btn-light hadcursor">Header</th>
-								<th onclick="sortTable(3)" class="btn-light hadcursor">Header</th>
-								<th onclick="sortTable(4)" class="btn-light hadcursor">Header</th>
+								<th onclick="sortTable(0)" class="btn-light hadcursor">Categoria</th>
+								<th onclick="sortTable(1)" class="btn-light hadcursor">Favorecido</th>
+								<th onclick="sortTable(2)" class="btn-light hadcursor">Status</th>
+								<th onclick="sortTable(3)" class="btn-light hadcursor">Valor</th>
+								<th onclick="sortTable(4)" class="btn-light hadcursor">Vencimento</th>
+
 							</tr>
 						</thead>
 						<tbody>
+							<?php foreach($this->data['Despesas'] as $despesa){ ?>
 							<tr>
-								<td>1,001</td>
-								<td>Lorem</td>
-								<td>ipsum</td>
-								<td>dolor</td>
-								<td>sit</td>
+								<td><?php echo $despesa['Categoria']; ?></td>
+								<td><?php echo $despesa['Favorecido']; ?></td>
+								<td><?php echo $despesa['StatusDespesa']; ?></td>
+								<td>R$ <?php echo $despesa['Valor']; ?></td>
+								<td><?php echo $despesa['DataVencimento']; ?></td>
 							</tr>
-							<tr>
-								<td>1,002</td>
-								<td>amet</td>
-								<td>consectetur</td>
-								<td>adipiscing</td>
-								<td>elit</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>Integer</td>
-								<td>nec</td>
-								<td>odio</td>
-								<td>Praesent</td>
-							</tr>
-							<tr>
-								<td>1,003</td>
-								<td>libero</td>
-								<td>Sed</td>
-								<td>cursus</td>
-								<td>ante</td>
-							</tr>
-							<tr>
-								<td>1,004</td>
-								<td>dapibus</td>
-								<td>diam</td>
-								<td>Sed</td>
-								<td>nisi</td>
-							</tr>
-							<tr>
-								<td>1,005</td>
-								<td>Nulla</td>
-								<td>quis</td>
-								<td>sem</td>
-								<td>at</td>
-							</tr>
-							<tr>
-								<td>1,006</td>
-								<td>nibh</td>
-								<td>elementum</td>
-								<td>imperdiet</td>
-								<td>Duis</td>
-							</tr>
-							<tr>
-								<td>1,007</td>
-								<td>sagittis</td>
-								<td>ipsum</td>
-								<td>Praesent</td>
-								<td>mauris</td>
-							</tr>
-							<tr>
-								<td>1,008</td>
-								<td>Fusce</td>
-								<td>nec</td>
-								<td>tellus</td>
-								<td>sed</td>
-							</tr>
-							<tr>
-								<td>1,009</td>
-								<td>augue</td>
-								<td>semper</td>
-								<td>porta</td>
-								<td>Mauris</td>
-							</tr>
-							<tr>
-								<td>1,010</td>
-								<td>massa</td>
-								<td>Vestibulum</td>
-								<td>lacinia</td>
-								<td>arcu</td>
-							</tr>
-							<tr>
-								<td>1,011</td>
-								<td>eget</td>
-								<td>nulla</td>
-								<td>Class</td>
-								<td>aptent</td>
-							</tr>
-							<tr>
-								<td>1,012</td>
-								<td>taciti</td>
-								<td>sociosqu</td>
-								<td>ad</td>
-								<td>litora</td>
-							</tr>
-							<tr>
-								<td>1,013</td>
-								<td>torquent</td>
-								<td>per</td>
-								<td>conubia</td>
-								<td>nostra</td>
-							</tr>
-							<tr>
-								<td>1,014</td>
-								<td>per</td>
-								<td>inceptos</td>
-								<td>himenaeos</td>
-								<td>Curabitur</td>
-							</tr>
-							<tr>
-								<td>1,015</td>
-								<td>sodales</td>
-								<td>ligula</td>
-								<td>in</td>
-								<td>libero</td>
-							</tr>
+							<?php } ?>
 						</tbody>
 					</table>
+				</div>
+				<button class="btn btn-danger rounded-circle add-button" data-toggle="modal" data-target="#modalAvatar">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+				</button>
+
+				<div class="modal fade" id="modalAvatar" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog" style="margin-top: 15%;" role="document">
+						<div class="modal-content">
+							<div class="modal-header bg-dark text-white">
+								<h5 class="modal-title" id="modalAvatarLabel">Adicionar Despesa</h5>
+								<button type="button" class="close closeEnviarFoto" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row pl-4 pr-1">
+									<select class="form-control col-md-5 mr-2" id="exampleFormControlSelect1">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+											<select class="form-control col-md-6" id="exampleFormControlSelect1">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+								<div class="form-group col-md-12 row pl-4 pr-1">
+									<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+								</div>
+								<div class="form-group row pl-4 pr-1">
+									<input type="email" class="form-control col-md-5 mr-2" id="exampleInputEmail1" placeholder="Enter email">
+									<input type="email" class="form-control col-md-6" id="exampleInputEmail1" placeholder="Enter email">
+								</div>
+							</div>
+							<div class="modal-footer">
+								FOOTER
+							</div>
+						</div>
+					</div>
 				</div>
 			</main>
 		</div>

@@ -35,7 +35,7 @@
 						</div>
 						<input name="Senha" type="password" class="form-control border border-dark" id="Senha" placeholder="Senha">
 					</div>
-					<div class="TriSea-technologies-Switch pt-2 pb-2">
+					<div class="Checkbox-Switch pt-2 pb-2">
 						<input id="TriSeaPrimary" name="TriSea1" type="checkbox"/>
 						<label for="TriSeaPrimary" class="label-primary"></label> Lembrar-me
 					</div>
