@@ -17,5 +17,31 @@ class DespesasModel extends CI_Model {
 		$resultado = $query->result_array();
 		return $resultado;
 	}
+
+	function buscarFavorecidos($id)
+	{ 
+		$this->db->select('Nome, IdFavorecido, IdCategoria, Descricao');
+		$this->db->where('IdUsuario', $id); 
+		$query = $this->db->get('Favorecidos'); 
+		return $query->row_array();
+	}
+
+	function listarFavorecidos($id)
+	{ 
+		$this->db->select('fav.IdFavorecido, fav.Nome');
+		$this->db->from('Favorecidos fav');
+		$this->db->where('fav.IdUsuario', $id); 
+		$query = $this->db->get(); 
+		return $query->result_array();
+	}
+
+	function listarFormasPagamento($id)
+	{ 
+		$this->db->select('fp.IdFormaPagamento, fp.Nome');
+		$this->db->from('FormaPagamento fp');
+		$this->db->where('fp.IdUsuario', $id); 
+		$query = $this->db->get(); 
+		return $query->result_array();
+	}
 }
 ?>

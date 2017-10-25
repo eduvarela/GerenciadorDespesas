@@ -46,6 +46,9 @@ CREATE TABLE `Favorecidos` (
 )
 
 ALTER TABLE `Favorecidos`
+ADD `IdUsuario` int(11) NOT NULL,
+
+ALTER TABLE `Favorecidos`
 ADD PRIMARY KEY (`IdFavorecido`),
 ADD FOREIGN KEY (IdCategoria) REFERENCES Categorias(IdCategoria);
 

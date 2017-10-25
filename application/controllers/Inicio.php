@@ -4,6 +4,14 @@ class Inicio extends CI_Controller {
 	{
 		$data = '';
 		$this->load->helper('url');
+		$this->load->library('session');
+
+		if (isset($this->session->userdata['id'])) {
+			if($this->session->userdata['id']) {
+				redirect('Painel/principal');
+			}
+		}	
+
 		$this->load->view('InicioView', $data);
 	}
 
