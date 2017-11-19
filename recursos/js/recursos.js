@@ -26,6 +26,7 @@
 
 var messages = [];
 var messageType = {success:"bg-success", error:"bg-danger", warning:"bg-warning", information:"bg-info"};
+var notifyType = {success:"success", error:"danger", warning:"warning", information:"info"};
 
 function displayModal(message, type, displayName) {
 
@@ -49,6 +50,21 @@ function displayModal(message, type, displayName) {
             $('#' + displayName).modal('show');
         }
 
+
+function displayNotify(message, type){
+  $.notify({
+  // options
+  message: message
+},{
+  // settings
+  type: notifyType[type],
+  z_index: 1052,
+    placement: {
+    from: "top",
+    align: "center"
+  }
+});
+}
 
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

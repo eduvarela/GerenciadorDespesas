@@ -20,7 +20,7 @@
 <body>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-			<a class="navbar-brand" href="#"><img src="<?php echo base_url("recursos/images/favicon.png");?>" width="20" height="20"> Gerenciador de Despesas</a>
+			<a class="navbar-brand" href="#"><img src="<?php echo base_url("recursos/images/favicon.png");?>" width="30" height="30"> Gerenciador de Despesas</a>
 			<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -81,6 +81,7 @@
 	<script src="<?php echo base_url("recursos/js/jquery-3.2.1.min.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/popper.min.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/bootstrap.min.js");?>"></script>
+	<script src="<?php echo base_url("recursos/js/bootstrap-notify.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/bootstrap-datepicker.min.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/bootstrap-datepicker.pt-BR.min.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/holder.js");?>"></script>
@@ -88,10 +89,10 @@
 	<script src="<?php echo base_url("recursos/js/jquery.mask.js");?>"></script>
 	<script src="<?php echo base_url("recursos/js/Chart.min.js");?>"></script>
 
-<script>
-	    $(document).ready(function(){
-      $("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelGeral/carregarPainelAsync");
-    });
-</script>
+	<script>
+		$(document).ready(function(){
+			$("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelGeral/carregarPainelAsync");
+		});
+	</script>
 </body>
 </html>

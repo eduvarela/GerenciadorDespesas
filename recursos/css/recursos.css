@@ -119,7 +119,7 @@
 
 .add-button{
   z-index: 100; 
-  position: absolute;
+  position: fixed;
   right: 12px; 
   bottom: 12px;
   padding: 0.5rem 1.0rem;

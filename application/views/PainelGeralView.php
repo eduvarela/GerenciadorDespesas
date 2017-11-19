@@ -1,38 +1,39 @@
-				<h1>Painel Geral</h1>
+				<h1 class="text-dark">Painel Geral</h1>
 
-				<section class="row text-center placeholders">
+				<section class="row text-center placeholders text-dark">
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart" width="100" height="100"></canvas>
-						<h4>Label</h4>
+						<h4>Categorias</h4>
 						<div class="text-muted">Something else</div>
 					</div>
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart2" width="100" height="100"></canvas>
-						<h4>Label</h4>
+						<h4>Favorecidos</h4>
 						<span class="text-muted">Something else</span>
 					</div>
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart3" width="100" height="100"></canvas>
-						<h4>Label</h4>
+						<h4>Pago</h4>
 						<span class="text-muted">Something else</span>
 					</div>
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart4" width="100" height="100"></canvas>
-						<h4>Label</h4>
+						<h4>Vencimento</h4>
 						<span class="text-muted">Something else</span>
 					</div>
 				</section>
 
-				<h2>Despesas</h2>
+				<h2 class="text-dark">Despesas</h2>
 				<div class="table-responsive">
 					<table id="despesas" class="table  table-hover">
 						<thead>
 							<tr>
 								<th onclick="sortTable(0)" class="btn-light hadcursor">Categoria</th>
 								<th onclick="sortTable(1)" class="btn-light hadcursor">Favorecido</th>
-								<th onclick="sortTable(2)" class="btn-light hadcursor">Status</th>
+								<th onclick="sortTable(2)" class="btn-light hadcursor">Pago</th>
 								<th onclick="sortTable(3)" class="btn-light hadcursor">Valor</th>
 								<th onclick="sortTable(4)" class="btn-light hadcursor">Vencimento</th>
+								<th onclick="sortTable(4)" class="btn-light hadcursor">Forma de Pagamento</th>
 
 							</tr>
 						</thead>
@@ -41,9 +42,10 @@
 							<tr>
 								<td><?php echo $despesa['Categoria']; ?></td>
 								<td><?php echo $despesa['Favorecido']; ?></td>
-								<td><?php echo $despesa['StatusDespesa']; ?></td>
+								<td><?php echo $despesa['Pago']; ?></td>
 								<td>R$ <?php echo $despesa['Valor']; ?></td>
 								<td><?php echo $despesa['DataVencimento']; ?></td>
+								<td><?php echo $despesa['FormaPagamento']; ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
@@ -64,44 +66,44 @@
 							</div>
 							<div class="modal-body">
 								<div class="form-group row pl-4 pr-1">
-									<select class="form-control col-md-5 mr-2" id="favorecidoSelect">
-										<option>Selecione o Favorecido</option>
+									<select class="form-control col-md-5 mr-2" id="DespesaFavorecido">
+										<option>Favorecido</option>
 										<<?php foreach($this->data['Favorecidos'] as $favorecido){ ?>
 										<option id="<?php echo $favorecido['IdFavorecido']; ?>"><?php echo $favorecido['Nome']; ?></option>
 										<?php } ?>
 									</select>
-									<select class="form-control col-md-6" id="formaPagamentoSelect">
-										<option>Selecione a forma de pagamento</option>
+									<select class="form-control col-md-6" id="DespesaFormaPagamento">
+										<option>Forma de Pagamento</option>
 										<<?php foreach($this->data['FormasPagamento'] as $formapagamento){ ?>
 										<option id="<?php echo $formapagamento['IdFormaPagamento']; ?>"><?php echo $formapagamento['Nome']; ?></option>
 										<?php } ?>
 									</select>
 								</div>
 								<div class="form-group col-md-12 row pl-4 pr-1">
-									<input type="text" class="form-control" id="descricaoInput" placeholder="Descrição">
+									<input type="text" class="form-control" id="DespesaDescricao" placeholder="Descrição">
 								</div>
 								
 
 								<div class="row">
 									<div class="form-group row ml-4">
-									<input type="text" class="form-control col-md-14 mr-2" id="exampleInputEmail1" placeholder="Valor">
+										<input type="text" class="form-control col-md-14 mr-2" id="DespesaValor" placeholder="Valor">
+									</div>
+									<div class="col-md-6 form-group input-group date container">
+										<input name="DataVencimento" id="DespesaVencimento" required="required" placeholder="Vencimento" type="text" maxlength="10" class="form-control"><span class="input-group-addon btn-dark"><i class="fa fa-calendar" aria-hidden="true"></i>
+									</span>
 								</div>
-								<div class="col-md-6 form-group input-group date container">
-								<input name="DataVencimento" id="DataVencimento" required="required" placeholder="Vencimento" type="text" maxlength="10" class="form-control"><span class="input-group-addon btn-dark"><i class="fa fa-calendar" aria-hidden="true"></i>
-								</span>
-							</div>
 							</div>
 
 
 							<div class="form-group col-md-12 row pl-4 pr-1">
 								<div class="Checkbox-Switch pt-2 pb-2">
-									<input id="TriSeaPrimary" name="TriSea1" type="checkbox"/>
+									<input id="TriSeaPrimary" class="DespesaPago" name="TriSea1" type="checkbox"/>
 									<label for="TriSeaPrimary" class="label-primary"></label> Pago
 								</div>								
 							</div>
 						</div>
 						<div class="modal-footer bg-dark">
-							<button class="btn btn-success">Adicionar</button><button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
+							<button id="adicionarDespesa" class="btn btn-success">Adicionar</button><button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
 						</div>
 					</div>
 				</div>
@@ -249,4 +251,29 @@ options: {
    	toggleActive: true
    });
 
+</script>
+
+<script>
+	$("#adicionarDespesa").click(function() {
+		var favorecido = $('#DespesaFavorecido').children(":selected").attr("id");
+		var formaPagamento = $('#DespesaFormaPagamento').children(":selected").attr("id");
+		var pago = $('.DespesaPago').prop('checked') ? "S" : "N";
+		var valor = $('#DespesaValor').val();
+		var descricao = $('#DespesaDescricao').val();
+		var vencimento = $('#DespesaVencimento').val();
+
+		displayNotify(vencimento,'error');
+		$.ajax({
+			type:'POST',
+			dataType : "json",
+			url:'<?php echo base_url("index.php/PainelGeral/adicionarDespesa"); ?>',
+			data: {'favorecido': favorecido, 'formaPagamento': formaPagamento, 'pago': pago, 'valor': valor, 'descricao': descricao, 'vencimento': vencimento},
+			success : function(data) {
+				displayNotify(data['message'], data['type']);
+			},
+			error : function(data) {
+				displayNotify(data['message'], data['type']);
+			}
+		});
+	});
 </script>
