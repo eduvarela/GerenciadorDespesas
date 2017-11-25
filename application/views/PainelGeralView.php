@@ -24,6 +24,19 @@
 				</section>
 
 				<h2 class="text-dark">Despesas</h2>
+				<hr>
+				<div class="row ml-1">
+					<input class="form-control col-md-9 mr-1" id="searchbar" onkeyup="searchInTable()" placeholder="Busca de Despesas" type="text">
+					<select class="form-control col-md-2" id="DespesaFiltro">
+						<option value="0">Categoria</option>
+						<option value="1">Favorecido</option>
+						<option value="2">Pago</option>
+						<option value="3">Valor</option>
+						<option value="4">Vencimento</option>
+						<option value="5">Forma de Pagamento</option>
+					</select>
+				</div>
+				<br>
 				<div class="table-responsive">
 					<table id="despesas" class="table  table-hover">
 						<thead>
@@ -109,138 +122,11 @@
 				</div>
 			</div>
 			<script>
-				var ctx = document.getElementById("myChart").getContext('2d');
-				var ctx2 = document.getElementById("myChart2").getContext('2d');
-				var ctx3 = document.getElementById("myChart3").getContext('2d');
-				var ctx4 = document.getElementById("myChart4").getContext('2d');
-
-				var myChart = new Chart(ctx, {
-					type: 'pie',
-					data: {
-						datasets: [{
-							data: [10, 20, 30],
-							backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							],
-							borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							],
-							borderWidth: 1
-						}],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-    'Red',
-    'Yellow',
-    'Blue'
-    ],
-},
-options: {
-	legend: {
-		display: false
-	}
-}
-});
-
-				var myChart = new Chart(ctx2, {
-					type: 'pie',
-					data: {
-						datasets: [{
-							data: [10, 20, 30],
-							backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							],
-							borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							],
-							borderWidth: 1
-						}],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-    'Red',
-    'Yellow',
-    'Blue'
-    ],
-},
-options: {
-	legend: {
-		display: false
-	}
-}
-});
-
-				var myChart2 = new Chart(ctx3, {
-					type: 'pie',
-					data: {
-						datasets: [{
-							data: [10, 20, 30],
-							backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							],
-							borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							],
-							borderWidth: 1
-						}],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-    'Red',
-    'Yellow',
-    'Blue'
-    ],
-},
-options: {
-	legend: {
-		display: false
-	}
-}
-});
-
-				var myChart = new Chart(ctx4, {
-					type: 'pie',
-					data: {
-						datasets: [{
-							data: [10, 20, 30],
-							backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							],
-							borderColor: [
-							'rgba(255,99,132,1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							],
-							borderWidth: 1
-						}],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-    'Red',
-    'Yellow',
-    'Blue'
-    ],
-},
-options: {
-	legend: {
-		display: false
-	}
-}
-});
+				criarGrafico('myChart', 'pie')
+				criarGrafico('myChart2', 'pie')
+				criarGrafico('myChart3', 'pie')
+				criarGrafico('myChart4', 'pie')
+				
    // Calendario para campos de data
    $('.input-group.date').datepicker({
    	format: "dd/mm/yyyy",
@@ -260,9 +146,7 @@ options: {
 		var pago = $('.DespesaPago').prop('checked') ? "S" : "N";
 		var valor = $('#DespesaValor').val();
 		var descricao = $('#DespesaDescricao').val();
-		var vencimento = $('#DespesaVencimento').val();
-
-		displayNotify(vencimento,'error');
+		var vencimento = new Date($('#DespesaVencimento').val());
 		$.ajax({
 			type:'POST',
 			dataType : "json",

@@ -1,5 +1,5 @@
 <?php
-class PainelGeral extends CI_Controller {
+class PainelDespesas extends CI_Controller {
 	public function carregarPainelAsync()
 	{
 		$data = "";
@@ -19,7 +19,7 @@ class PainelGeral extends CI_Controller {
 			$this->data['Despesas'][$x]['DataVencimento'] = $this->ConverterDataPadraoBrasileiro($this->data['Despesas'][$x]['DataVencimento'],'%d/%m/%Y');
 		}
 
-		$this->load->view('PainelGeralView', $data);
+		$this->load->view('PainelDespesasView', $data);
 	}
 
 	public function adicionarDespesa(){

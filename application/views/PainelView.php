@@ -27,7 +27,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+				<!-- 	<li class="nav-item active">
 						<a class="nav-link" href="#">Painel</a>
 					</li>
 					<li class="nav-item">
@@ -35,15 +35,15 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Contato</a>
-					</li>
+					</li> -->
 				</ul>
 				<div class="btn-group">
-					<button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button type="button" class="btn btn-outline-light dropdown-toggle clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-user" aria-hidden="true"></i> <?php echo $this->data['Usuario']['Nome']; ?>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right" style="right:0;left:auto;">
-						<button id="editarPerfil" class="dropdown-item text-dark" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Meu Perfil</button>
-						<a href="<?php echo base_url('index.php/Painel/desconectar'); ?>"><button class="dropdown-item text-dark" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</button></a>
+						<button id="editarPerfil" class="dropdown-item text-dark clickable" type="button"><i class="fa fa-user-o" aria-hidden="true"></i>  Meu Perfil</button>
+						<a href="<?php echo base_url('index.php/Painel/desconectar'); ?>"><button class="dropdown-item text-dark clickable" type="button"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sair</button></a>
 					</div>
 				</div>
 			</div>
@@ -55,9 +55,9 @@
 			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item">
-						<a class="nav-link btn-dark" href="#">Geral</a>
+						<a id="BotaoGeral" class="nav-link btn-dark" href="#">Geral</a>
 					</li>
-					<li class="nav-item">
+					<li id="BotaoDespesas" class="nav-item">
 						<a class="nav-link btn-light" href="#">Despesas</a>
 					</li>
 					<li class="nav-item">
@@ -92,6 +92,14 @@
 	<script>
 		$(document).ready(function(){
 			$("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelGeral/carregarPainelAsync");
+		});
+
+		$("#BotaoGeral").click(function(){
+			$("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelGeral/carregarPainelAsync");
+		});
+
+		$("#BotaoDespesas").click(function(){
+			$("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelDespesas/carregarPainelAsync");
 		});
 	</script>
 </body>

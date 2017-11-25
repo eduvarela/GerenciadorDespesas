@@ -125,3 +125,16 @@
   padding: 0.5rem 1.0rem;
   font-size: 2.0rem;
 }
+
+
+.btn-outline-light.active, .btn-outline-light:active, .show>.btn-outline-light.dropdown-toggle {
+  color:#000;
+  }
+
+.btn-outline-light.hover, .btn-outline-light:hover, .show>.btn-outline-light.dropdown-toggle {
+  color:#000;
+  }
+
+.clickable{
+  cursor: pointer;
+}

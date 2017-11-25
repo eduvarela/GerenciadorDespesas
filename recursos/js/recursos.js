@@ -9,49 +9,49 @@
    });
 
 	//Tamanho do campo ao entrar em foco / necessario propriedade data-action="grow" na tag
-   $(document).on("focus", '[data-action="grow"]', function() {
-   	$(window).width() > 1e3 && $(this).animate({
-   		width: 700
-   	});
+ $(document).on("focus", '[data-action="grow"]', function() {
+  $(window).width() > 1e3 && $(this).animate({
+   width: 700
+ });
 
-   	$(document).on("blur", '[data-action="grow"]', function() {
-   		if ($(window).width() > 1e3) {
-   			$(this).animate({
-   				width: 500
-   			});
-   		}
-   	});
+  $(document).on("blur", '[data-action="grow"]', function() {
+   if ($(window).width() > 1e3) {
+    $(this).animate({
+     width: 500
    });
+  }
+});
+});
 
 
-var messages = [];
-var messageType = {success:"bg-success", error:"bg-danger", warning:"bg-warning", information:"bg-info"};
-var notifyType = {success:"success", error:"danger", warning:"warning", information:"info"};
+ var messages = [];
+ var messageType = {success:"bg-success", error:"bg-danger", warning:"bg-warning", information:"bg-info"};
+ var notifyType = {success:"success", error:"danger", warning:"warning", information:"info"};
 
-function displayModal(message, type, displayName) {
+ function displayModal(message, type, displayName) {
 
-         $('#' + displayName).remove();
-          $('body').append("<div id='" + displayName + "' class='modal'>" 
-            + "<div class='modal-dialog' style='' role='document'>"
-            + "<div class='modal-content'>"
-            + "<div class='modal-header text-white " + messageType[type] + "'>"
-            + "<h5 class='modal-title'>" + displayName + "</h5>"
-            + "<button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>"
-            + "<span aria-hidden='true'>&times;</span>"
-            + "</button>"
-            + "</div>"
-            + "<div id=message' class='modal-body'>"
-            + "<p>" + message + "</p>"
-            + " </div>"
-            + "</div>"
-            + "</div>"
-            + "</div>");
+   $('#' + displayName).remove();
+   $('body').append("<div id='" + displayName + "' class='modal'>" 
+    + "<div class='modal-dialog' style='' role='document'>"
+    + "<div class='modal-content'>"
+    + "<div class='modal-header text-white " + messageType[type] + "'>"
+    + "<h5 class='modal-title'>" + displayName + "</h5>"
+    + "<button type='button' class='close' data-dismiss='modal' aria-label='Fechar'>"
+    + "<span aria-hidden='true'>&times;</span>"
+    + "</button>"
+    + "</div>"
+    + "<div id=message' class='modal-body'>"
+    + "<p>" + message + "</p>"
+    + " </div>"
+    + "</div>"
+    + "</div>"
+    + "</div>");
 
-            $('#' + displayName).modal('show');
-        }
+   $('#' + displayName).modal('show');
+ }
 
 
-function displayNotify(message, type){
+ function displayNotify(message, type){
   $.notify({
   // options
   message: message
@@ -59,9 +59,44 @@ function displayNotify(message, type){
   // settings
   type: notifyType[type],
   z_index: 1052,
-    placement: {
+  placement: {
     from: "top",
     align: "center"
+  }
+});
+}
+
+function criarGrafico(elemento, tipo){
+  var grafico = document.getElementById(elemento).getContext('2d');
+
+  var grafico = new Chart(grafico, {
+    type: tipo,
+    data: {
+      datasets: [{
+        data: [10, 20, 30],
+        backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        ],
+        borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        ],
+        borderWidth: 1
+      }],
+
+    labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+    ],
+  },
+  options: {
+    legend: {
+      display: false
+    }
   }
 });
 }
@@ -118,5 +153,27 @@ function sortTable(n) {
         switching = true;
       }
     }
+  }
+}
+
+function searchInTable() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, tipoFiltro;
+  input = document.getElementById("searchbar");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("despesas");
+  tr = table.getElementsByTagName("tr");
+  tipoFiltro = document.getElementById("DespesaFiltro").options[document.getElementById("DespesaFiltro").selectedIndex].value;
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[tipoFiltro];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
   }
 }
