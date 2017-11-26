@@ -69,6 +69,9 @@
 					<li class="nav-item">
 						<a class="nav-link btn-light" href="#">Categorias</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link btn-light" href="#">Relatório de Despesas</a>
+					</li>
 				</ul>
 			</nav>
 

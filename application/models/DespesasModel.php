@@ -19,14 +19,6 @@ class DespesasModel extends CI_Model {
 		return $resultado;
 	}
 
-	function buscarFavorecidos($id)
-	{ 
-		$this->db->select('Nome, IdFavorecido, IdCategoria, Descricao');
-		$this->db->where('IdUsuario', $id); 
-		$query = $this->db->get('Favorecidos'); 
-		return $query->row_array();
-	}
-
 	function listarFavorecidos($id)
 	{ 
 		$this->db->select('fav.IdFavorecido, fav.Nome');
@@ -45,6 +37,34 @@ class DespesasModel extends CI_Model {
 		return $query->result_array();
 	}
 
+	function buscarDespesasPorFavorecidos($id)
+	{ 
+		$this->db->select('fav.Nome, Count(*) as Valor');
+		$this->db->from('Despesas des');
+		$this->db->join('Favorecidos fav', 'fav.IdFavorecido = des.IdFavorecido', 'inner');
+		$this->db->where('des.IdUsuario', $id); 
+		$this->db->group_by("des.IdFavorecido");
+		$query = $this->db->get(); 
+
+	//	log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($query->row_array()));
+
+		return $query->result_array();
+	}
+
+// SELECT fav.Nome ,Count(*) FROM Despesas des
+// JOIN Favorecidos fav ON fav.IdFavorecido = des.IdFavorecido
+// WHERE des.IdUsuario = 1
+// GROUP BY des.IdFavorecido;
+
+	function buscarDespesasPorFormasPagamento($id)
+	{ 
+		$this->db->select('Count(*)');
+		$this->db->from('FormaPagamento');
+		$this->db->where('fp.IdUsuario', $id); 
+		$query = $this->db->get(); 
+		return $query->result_array();
+	}
+
 	function adicionarDespesa($usuario, $favorecido, $formaPagamento, $pago, $valor, $descricao, $vencimento){
 
 		$data = array(
@@ -55,7 +75,7 @@ class DespesasModel extends CI_Model {
 			'Valor'  => $valor,
 			'Descricao'  => $descricao,
 			'DataVencimento'  => date('Y-m-d H:i:s',strtotime($vencimento)),
-			);
+		);
 
 		$this->db->insert('Despesas', $data);
 		return true;

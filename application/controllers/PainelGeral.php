@@ -43,9 +43,20 @@ class PainelGeral extends CI_Controller {
 				$data = array('message'=>"Por favor preencher todos os campos!", 'type'=>"error");
 			}
 		}else{
-				$data = array('message'=>"Por favor preencher todos os campos!", 'type'=>"error");
+			$data = array('message'=>"Por favor preencher todos os campos!", 'type'=>"error");
 		}
 		echo json_encode($data);
+	}
+
+	public function estatisticasDespesasPorFavorecido(){
+		$data = "";
+		$this->load->helper('url');
+		$this->load->library('session');
+		$this->load->model('DespesasModel');
+		$this->data['EstatisticasFavorecidos'] = $this->DespesasModel->buscarDespesasPorFavorecidos($this->session->userdata['id']);
+		log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($this->data['EstatisticasFavorecidos']));
+
+		echo json_encode($this->data['EstatisticasFavorecidos']);
 	}
 
 	public function ConverterDataPadraoBrasileiro($date, $datestring){

@@ -9,7 +9,7 @@
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart2" width="100" height="100"></canvas>
 						<h4>Favorecidos</h4>
-						<span class="text-muted">Something else</span>
+						<span class="text-muted">nº de Despesas <br>por Favorecido</span>
 					</div>
 					<div class="col-6 col-sm-3 placeholder">
 						<canvas id="myChart3" width="100" height="100"></canvas>
@@ -103,30 +103,30 @@
 									</div>
 									<div class="col-md-6 form-group input-group date container">
 										<input name="DataVencimento" id="DespesaVencimento" required="required" placeholder="Vencimento" type="text" maxlength="10" class="form-control"><span class="input-group-addon btn-dark"><i class="fa fa-calendar" aria-hidden="true"></i>
-									</span>
+										</span>
+									</div>
+								</div>
+
+
+								<div class="form-group col-md-12 row pl-4 pr-1">
+									<div class="Checkbox-Switch pt-2 pb-2">
+										<input id="TriSeaPrimary" class="DespesaPago" name="TriSea1" type="checkbox"/>
+										<label for="TriSeaPrimary" class="label-primary"></label> Pago
+									</div>								
 								</div>
 							</div>
-
-
-							<div class="form-group col-md-12 row pl-4 pr-1">
-								<div class="Checkbox-Switch pt-2 pb-2">
-									<input id="TriSeaPrimary" class="DespesaPago" name="TriSea1" type="checkbox"/>
-									<label for="TriSeaPrimary" class="label-primary"></label> Pago
-								</div>								
+							<div class="modal-footer bg-dark">
+								<button id="adicionarDespesa" class="btn btn-success">Adicionar</button><button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
 							</div>
-						</div>
-						<div class="modal-footer bg-dark">
-							<button id="adicionarDespesa" class="btn btn-success">Adicionar</button><button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
 						</div>
 					</div>
 				</div>
-			</div>
-			<script>
-				criarGrafico('myChart', 'pie')
-				criarGrafico('myChart2', 'pie')
-				criarGrafico('myChart3', 'pie')
-				criarGrafico('myChart4', 'pie')
-				
+				<script>
+					// criarGrafico('myChart', 'bar')
+					// criarGrafico('myChart2', 'bar')
+					// criarGrafico('myChart3', 'bar')
+					// criarGrafico('myChart4', 'bar')
+
    // Calendario para campos de data
    $('.input-group.date').datepicker({
    	format: "dd/mm/yyyy",
@@ -138,7 +138,22 @@
    });
 
 </script>
-
+<script>
+	$( document ).ready(function() {
+		$.ajax({
+			type:'POST',
+			dataType : "json",
+			url:'<?php echo base_url("index.php/PainelGeral/estatisticasDespesasPorFavorecido"); ?>',
+			success : function(data) {
+			//	alert(data.length);
+			criarGrafico('myChart2', 'bar', data);
+		},
+		error : function(data) {
+		//	alert(data['EstatisticasFavorecidos']);
+		}
+	});
+	});
+</script>
 <script>
 	$("#adicionarDespesa").click(function() {
 		var favorecido = $('#DespesaFavorecido').children(":selected").attr("id");
