@@ -1,25 +1,20 @@
 				<h1 class="text-dark">Painel Geral</h1>
 
 				<section class="row text-center placeholders text-dark">
-					<div class="col-6 col-sm-3 placeholder">
-						<canvas id="myChart" width="100" height="100"></canvas>
+					<div class="col-8 col-sm-4 placeholder">
+						<canvas id="graficoPorCategorias" width="100" height="100"></canvas>
 						<h4>Categorias</h4>
-						<div class="text-muted">Something else</div>
+						<span class="text-muted">nº de Despesas por Categoria</span>
 					</div>
-					<div class="col-6 col-sm-3 placeholder">
-						<canvas id="myChart2" width="100" height="100"></canvas>
+					<div class="col-8 col-sm-4 placeholder">
+						<canvas id="graficoPorFavorecidos" width="100" height="100"></canvas>
 						<h4>Favorecidos</h4>
-						<span class="text-muted">nº de Despesas <br>por Favorecido</span>
+						<span class="text-muted">nº de Despesas por Favorecido</span>
 					</div>
-					<div class="col-6 col-sm-3 placeholder">
-						<canvas id="myChart3" width="100" height="100"></canvas>
-						<h4>Pago</h4>
-						<span class="text-muted">Something else</span>
-					</div>
-					<div class="col-6 col-sm-3 placeholder">
-						<canvas id="myChart4" width="100" height="100"></canvas>
-						<h4>Vencimento</h4>
-						<span class="text-muted">Something else</span>
+					<div class="col-8 col-sm-4 placeholder">
+						<canvas id="graficoPorPeriodo" width="100" height="100"></canvas>
+						<h4>Periodo</h4>
+						<span class="text-muted">nº de Despesas por Periodo</span>
 					</div>
 				</section>
 
@@ -81,7 +76,7 @@
 								<div class="form-group row pl-4 pr-1">
 									<select class="form-control col-md-5 mr-2" id="DespesaFavorecido">
 										<option>Favorecido</option>
-										<<?php foreach($this->data['Favorecidos'] as $favorecido){ ?>
+										<?php foreach($this->data['Favorecidos'] as $favorecido){ ?>
 										<option id="<?php echo $favorecido['IdFavorecido']; ?>"><?php echo $favorecido['Nome']; ?></option>
 										<?php } ?>
 									</select>
@@ -140,19 +135,57 @@
 </script>
 <script>
 	$( document ).ready(function() {
+
 		$.ajax({
 			type:'POST',
 			dataType : "json",
 			url:'<?php echo base_url("index.php/PainelGeral/estatisticasDespesasPorFavorecido"); ?>',
 			success : function(data) {
 			//	alert(data.length);
-			criarGrafico('myChart2', 'bar', data);
+			criarGrafico('graficoPorFavorecidos', 'bar', data);
 		},
 		error : function(data) {
-		//	alert(data['EstatisticasFavorecidos']);
+			criarGrafico('graficoPorFavorecidos', 'bar', data);
 		}
 	});
+
+		$.ajax({
+			type:'POST',
+			dataType : "json",
+			url:'<?php echo base_url("index.php/PainelGeral/estatisticasDespesasPorCategoria"); ?>',
+			success : function(data) {
+			//	alert(data.length);
+			criarGrafico('graficoPorCategorias', 'bar', data);
+		},
+		error : function(data) {
+			criarGrafico('graficoPorFavorecidos', 'bar', data);
+		}
 	});
+
+		$.ajax({
+			type:'POST',
+			dataType : "json",
+			url:'<?php echo base_url("index.php/PainelGeral/estatisticasDespesasPorPeriodo"); ?>',
+			success : function(data) {
+			//	alert(data.length);
+			criarGrafico('graficoPorPeriodo', 'bar', data);
+		},
+		error : function(data) {
+			criarGrafico('graficoPorPeriodo', 'bar', data);
+		}
+	});
+
+	});
+
+	$('.nav-link').click(function() {
+    $(this).addClass('btn-dark')
+    		.removeClass('btn-light')
+    		.parent()
+    		.siblings()
+    		.children('.btn-dark')
+    		.removeClass('btn-dark')
+    		.addClass('btn-light');
+});
 </script>
 <script>
 	$("#adicionarDespesa").click(function() {

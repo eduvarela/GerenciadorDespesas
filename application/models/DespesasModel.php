@@ -46,7 +46,7 @@ class DespesasModel extends CI_Model {
 		$this->db->group_by("des.IdFavorecido");
 		$query = $this->db->get(); 
 
-	//	log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($query->row_array()));
+	//	log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($query->result_array()));
 
 		return $query->result_array();
 	}
@@ -56,14 +56,52 @@ class DespesasModel extends CI_Model {
 // WHERE des.IdUsuario = 1
 // GROUP BY des.IdFavorecido;
 
-	function buscarDespesasPorFormasPagamento($id)
+	function buscarDespesasPorFormaPagamento($id)
 	{ 
-		$this->db->select('Count(*)');
-		$this->db->from('FormaPagamento');
-		$this->db->where('fp.IdUsuario', $id); 
+		$this->db->select('fp.Nome, Count(*) as Valor');
+		$this->db->from('Despesas des');
+		$this->db->join('FormaPagamento fp', 'fp.IdFormaPagamento = des.IdFormaPagamento', 'inner');
+		$this->db->where('des.IdUsuario', $id); 
+		$this->db->group_by("des.IdFormaPagamento");
 		$query = $this->db->get(); 
+
+		log_message('error', 'buscarDespesasPorFormaPagamento[resultado]:' . serialize($query->result_array()));
+
 		return $query->result_array();
 	}
+
+	function buscarDespesasPorCategoria($id)
+	{ 
+		$this->db->select('cat.Nome, Count(*) as Valor');
+		$this->db->from('Despesas des');
+		$this->db->join('Favorecidos fav', 'fav.IdFavorecido = des.IdFavorecido', 'inner');
+		$this->db->join('Categorias cat', 'fav.IdCategoria = cat.IdCategoria', 'inner');
+		$this->db->where('des.IdUsuario', $id); 
+		$this->db->group_by("cat.IdCategoria");
+		$query = $this->db->get(); 
+
+
+		return $query->result_array();
+	}
+
+	function buscarDespesasPorPeriodo($id, $periodo)
+	{ 
+		$this->db->select('EXTRACT(MONTH FROM des.DataVencimento) as Nome, SUM(des.Valor) as Valor');
+		$this->db->from('Despesas des');
+		$this->db->where('des.IdUsuario', $id); 
+		$this->db->where('des.DataVencimento BETWEEN DATE_SUB(NOW(), INTERVAL ' . $periodo. '* 30  DAY) AND NOW()'); 
+		//$this->db->group_by("EXTRACT(MONTH FROM des.DataVencimento)");
+
+		$query = $this->db->get(); 
+		log_message('error', 'buscarDespesasPorPeriodo[resultado]:' . serialize($query->result_array()));
+
+
+		return $query->result_array();
+	}
+// BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW();
+// 	select SUM(Valor) from Despesas
+// WHERE (EXTRACT(MONTH FROM DataVencimento) = 11)
+// order by DataVencimento
 
 	function adicionarDespesa($usuario, $favorecido, $formaPagamento, $pago, $valor, $descricao, $vencimento){
 
@@ -74,11 +112,18 @@ class DespesasModel extends CI_Model {
 			'Pago'  => $pago,
 			'Valor'  => $valor,
 			'Descricao'  => $descricao,
-			'DataVencimento'  => date('Y-m-d H:i:s',strtotime($vencimento)),
+			'DataVencimento'  => date('Y-m-d',strtotime($this->dateEmMysql($vencimento))),
 		);
 
 		$this->db->insert('Despesas', $data);
 		return true;
 	}
+
+	public static function dateEmMysql($dateSql){
+    $ano= substr($dateSql, 6);
+    $mes= substr($dateSql, 3,-5);
+    $dia= substr($dateSql, 0,-8);
+    return $ano."-".$mes."-".$dia;
+}
 }
 ?>

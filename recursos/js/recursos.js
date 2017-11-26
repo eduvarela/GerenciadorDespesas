@@ -69,50 +69,53 @@
 
 
 function criarGrafico(elemento, tipo, data){
-var grafico = document.getElementById(elemento).getContext('2d');
+  var grafico = document.getElementById(elemento).getContext('2d');
 
 
-var itens = [];
-var valores = [];
-for(var i = 0; i < data.length; i++){
-  itens.push(data[i].Nome);
-  valores.push(data[i].Valor);
-}
+  var itens = [];
+  var valores = [];
+  for(var i = 0; i < data.length; i++){
+    console.log("item: " + data[i].Nome);
+    console.log("valor: " + data[i].Valor);
+    itens.push(data[i].Nome);
+    valores.push(data[i].Valor);
+  }
 
-var grafico = new Chart(grafico, {
+  var grafico = new Chart(grafico, {
     type: tipo,
     data: {
-        labels: itens,
-        datasets: [{
-            label: 'nº de Despesas',
-            data: valores,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
+      labels: itens,
+      datasets: [{
+        label: 'nº de Despesas',
+        data: valores,
+        backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)'
+        ],
+        borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 1
+      }]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            autoSkip: false
+          }
+        }]
+      }
     }
-});
+  });
 }
 
 function sortTable(n) {

@@ -129,12 +129,20 @@
 
 .btn-outline-light.active, .btn-outline-light:active, .show>.btn-outline-light.dropdown-toggle {
   color:#000;
-  }
+}
 
 .btn-outline-light.hover, .btn-outline-light:hover, .show>.btn-outline-light.dropdown-toggle {
   color:#000;
-  }
+}
 
 .clickable{
   cursor: pointer;
+}
+
+.btn-dark.focus, .btn-dark:focus {
+  box-shadow: none;
+}
+
+.btn-light.focus, .btn-light:focus{
+  box-shadow: none;
 }

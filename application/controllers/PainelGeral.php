@@ -54,9 +54,60 @@ class PainelGeral extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('DespesasModel');
 		$this->data['EstatisticasFavorecidos'] = $this->DespesasModel->buscarDespesasPorFavorecidos($this->session->userdata['id']);
-		log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($this->data['EstatisticasFavorecidos']));
+		//log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($this->data['EstatisticasFavorecidos']));
 
 		echo json_encode($this->data['EstatisticasFavorecidos']);
+	}
+
+	public function estatisticasDespesasPorFormaPagamento(){
+		$data = "";
+		$this->load->helper('url');
+		$this->load->library('session');
+		$this->load->model('DespesasModel');
+		$this->data['EstatisticasFormaPagamento'] = $this->DespesasModel->buscarDespesasPorFormaPagamento($this->session->userdata['id']);
+		//log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($this->data['EstatisticasFavorecidos']));
+
+		echo json_encode($this->data['EstatisticasFormaPagamento']);
+	}
+
+	public function estatisticasDespesasPorCategoria(){
+		$data = "";
+		$this->load->helper('url');
+		$this->load->library('session');
+		$this->load->model('DespesasModel');
+		$this->data['EstatisticasCategoria'] = $this->DespesasModel->buscarDespesasPorCategoria($this->session->userdata['id']);
+		//log_message('error', 'estatisticasDespesasPorFavorecido[resultado]:' . serialize($this->data['EstatisticasFavorecidos']));
+
+		echo json_encode($this->data['EstatisticasCategoria']);
+	}
+
+	public function estatisticasDespesasPorPeriodo(){
+		$meses = array(
+			1 => 'Janeiro',
+			'Fevereiro',
+			'Março',
+			'Abril',
+			'Maio',
+			'Junho',
+			'Julho',
+			'Agosto',
+			'Setembro',
+			'Outubro',
+			'Novembro',
+			'Dezembro'
+		);
+
+		$data = "";
+		$this->load->helper('url');
+		$this->load->library('session');
+		$this->load->model('DespesasModel');
+		$this->data['EstatisticasPeriodo'] = $this->DespesasModel->buscarDespesasPorPeriodo($this->session->userdata['id'], 3);
+
+		for($x=count($this->data['EstatisticasPeriodo'])-1; $x>=0; $x--){
+			$this->data['EstatisticasPeriodo'][$x]['Nome'] = $meses[$this->data['EstatisticasPeriodo'][$x]['Nome']];
+		}
+
+		echo json_encode($this->data['EstatisticasPeriodo']);
 	}
 
 	public function ConverterDataPadraoBrasileiro($date, $datestring){
