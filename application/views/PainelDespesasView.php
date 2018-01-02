@@ -1,8 +1,8 @@
 <h1 class="text-dark">Despesas</h1>
 
 <div class="row ml-1">
-	<input class="form-control col-md-9 mr-1" id="searchbar" onkeyup="searchInTable()" placeholder="Busca de Despesas" type="text">
-	<select class="form-control col-md-2" id="DespesaFiltro">
+	<input class="form-control col mr-1" id="searchbar" onkeyup="searchInTable()" placeholder="Busca de Despesas" type="text">
+	<select class="form-control col-md-2 mr-3 clickable" id="DespesaFiltro">
 		<option value="0">Categoria</option>
 		<option value="1">Favorecido</option>
 		<option value="2">Pago</option>
@@ -41,7 +41,7 @@
 	</table>
 </div>
 <button class="btn btn-danger rounded-circle add-button" data-toggle="modal" data-target="#modalAvatar">
-	<i class="fa fa-plus" aria-hidden="true"></i>
+	<i class="fa fa-plus clickable" aria-hidden="true"></i>
 </button>
 
 <div class="modal fade" id="modalAvatar" tabindex="-1" role="dialog" aria-hidden="true">
@@ -92,7 +92,7 @@
 			</div>
 		</div>
 		<div class="modal-footer bg-dark">
-			<button id="adicionarDespesa" class="btn btn-success">Adicionar</button><button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
+			<button id="adicionarDespesa" class="btn btn-success clickable">Adicionar</button><button class="btn btn-danger clickable" data-dismiss="modal" aria-label="Close">Cancelar</button>
 		</div>
 	</div>
 </div>

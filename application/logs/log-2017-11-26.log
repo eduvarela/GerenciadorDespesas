@@ -216,3 +216,5 @@ ERROR - 2017-11-26 23:02:40 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2
 ERROR - 2017-11-26 23:03:10 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2:{s:4:"Nome";s:2:"11";s:5:"Valor";s:7:"5566.00";}}
 ERROR - 2017-11-26 23:03:13 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2:{s:4:"Nome";s:2:"11";s:5:"Valor";s:7:"5566.00";}}
 ERROR - 2017-11-26 23:03:16 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2:{s:4:"Nome";s:2:"11";s:5:"Valor";s:7:"5566.00";}}
+ERROR - 2017-11-26 23:06:07 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2:{s:4:"Nome";s:2:"11";s:5:"Valor";s:7:"5566.00";}}
+ERROR - 2017-11-26 23:06:13 --> buscarDespesasPorPeriodo[resultado]:a:1:{i:0;a:2:{s:4:"Nome";s:2:"11";s:5:"Valor";s:7:"5566.00";}}

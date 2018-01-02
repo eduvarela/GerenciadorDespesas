@@ -104,6 +104,16 @@
 		$("#BotaoDespesas").click(function(){
 			$("#conteudoDinamico").load("<?php echo base_url(); ?>index.php/PainelDespesas/carregarPainelAsync");
 		});
+
+		$('.nav-link').click(function() {
+			$(this).addClass('btn-dark')
+			.removeClass('btn-light')
+			.parent()
+			.siblings()
+			.children('.btn-dark')
+			.removeClass('btn-dark')
+			.addClass('btn-light');
+		});
 	</script>
 </body>
 </html>
