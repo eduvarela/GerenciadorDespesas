@@ -1,6 +1,8 @@
 # Gerenciador de Despesas
 
 Uma aplicação web com o objetivo de monitorar despesas e realizar o mapeamento dos gastos efetuados.
+![alt text](https://raw.githubusercontent.com/eduvarela/GerenciadorDespesas/master/gerenciador.png)
+
 
 ## Ambiente de Desenvolvimento
 
