@@ -82,7 +82,7 @@
 									</select>
 									<select class="form-control col-md-6" id="DespesaFormaPagamento">
 										<option>Forma de Pagamento</option>
-										<<?php foreach($this->data['FormasPagamento'] as $formapagamento){ ?>
+										<?php foreach($this->data['FormasPagamento'] as $formapagamento){ ?>
 										<option id="<?php echo $formapagamento['IdFormaPagamento']; ?>"><?php echo $formapagamento['Nome']; ?></option>
 										<?php } ?>
 									</select>
