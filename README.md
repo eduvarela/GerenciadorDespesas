@@ -22,4 +22,4 @@ Uma aplicação web com o objetivo de monitorar despesas e realizar o mapeamen
 
 ## Autor
 
-* **[Eduardo Varela](https://github.com/eduvarela)** - *Analista de Sistemas*
+* **[Eduardo Varela](https://github.com/eduvarela)**
