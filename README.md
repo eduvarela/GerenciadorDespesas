@@ -12,7 +12,7 @@ Uma aplicação web com o objetivo de monitorar despesas e realizar o mapeamen
 
 * Qualquer ambiente com suporte a PHP 5.6 ou superior e MySQL 5.5 ou superior.
 
-## Técnologias Utilizadas
+## Tecnologias Utilizadas
 
 * [CodeIgniter](https://www.codeigniter.com/) - Framework PHP para a criação de aplicacões web completas.
 * [Jquery](https://jquery.com/) - Framework Javascript para a manipulação de eventos e animações em aplicações web.
