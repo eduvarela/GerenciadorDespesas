@@ -8,10 +8,9 @@ class UsuarioModel extends CI_Model {
 	function autenticar($email, $senha){
 		$this->db->where('Email', $email); 
 		$this->db->where('Senha', md5($senha));
-		$this->db->where('StatusConta', 1);
+		$this->db->where('Status', 1);
 		$query = $this->db->get('Usuarios'); 
 		return $query->row_array();
-        //return ($query->num_rows() == 1);
 	}
 	#Verifica se o e-mail é válido
 	function validarEmail($email)
@@ -29,22 +28,13 @@ class UsuarioModel extends CI_Model {
 		if($query->num_rows() == 1){
 			return false;
 		}
-		// if($this->input->post('Senha') != $this->input->post('Senhac')){
-		// 	return false;
-		// }
 		
 		$data = array(
 			'Nome'  => $nome,
 			'Email' => $email,
 			'Senha' => md5($senha),
-			'SenhaAntiga' => '0',
-			'Status'=> 1,
-			'Peso' => $peso, 
-			'Altura' => $altura,
-			'Sexo' => $sexo,
+			'status'=> 1,
 			'DataNascimento' => date('Y-m-d H:i:s',strtotime($dataNascimento)),
-			'DataCadastro' => date('Y-m-d H:i:s'),
-			'DataUltimaModificacao' => date('Y-m-d H:i:s')
 			);
 
 		$this->db->insert('Usuarios', $data);
@@ -53,14 +43,9 @@ class UsuarioModel extends CI_Model {
 
 	function select($id)
 	{
-		//$this->db->where('id', $this->input->post('id')); 
 		$this->db->where('id', $id); 
 		$query = $this->db->get('Usuarios'); 
-
-		$ret = $query->row_array();
-		//$ret['DataNascimento'] = date('m/d/Y', strtotime($ret['DataNascimento']));
-		return $ret;
-
+		return $query->row_array();
 	}
 
 	function buscarUsuarioEmail($email)
@@ -74,7 +59,7 @@ class UsuarioModel extends CI_Model {
 	function buscarDadosUsuario($id, $dados)
 	{ 
 		$this->db->select($dados);
-		$this->db->where('idUsuario', $id); 
+		$this->db->where('id', $id); 
 		$query = $this->db->get('Usuarios'); 
 		return $query->row_array();
 	}

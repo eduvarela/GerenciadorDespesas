@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Set-2019 às 00:58
+-- Tempo de geração: 02-Set-2019 às 01:33
 -- Versão do servidor: 10.4.6-MariaDB
 -- versão do PHP: 7.3.8
 
@@ -55,10 +55,19 @@ CREATE TABLE `despesas` (
   `idformapagamento` int(11) NOT NULL,
   `nome` varchar(60) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `valor` float NOT NULL,
+  `valor` decimal(10,0) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `vencimento` date NOT NULL
+  `vencimento` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `despesas`
+--
+
+INSERT INTO `despesas` (`id`, `idUsuario`, `idcategoria`, `idfavorecido`, `idformapagamento`, `nome`, `descricao`, `valor`, `status`, `vencimento`) VALUES
+(1, 1, 1, 6, 4, 'Hambuger', 'Hambuger', '100', 1, '2019-09-01 00:00:00'),
+(2, 1, 2, 5, 3, 'Corrida', 'Corrida', '20', 1, '2019-10-01 00:00:00'),
+(3, 1, 1, 6, 4, 'Burgão', 'Burgão', '15', 1, '2019-12-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -178,7 +187,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de tabela `despesas`
 --
 ALTER TABLE `despesas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `favorecidos`

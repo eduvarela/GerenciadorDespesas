@@ -16,7 +16,7 @@ class PainelGeral extends CI_Controller {
 		$this->data['FormasPagamento'] = $this->DespesasModel->listarFormasPagamento($this->session->userdata['id']);
 
 		for($x=count($this->data['Despesas'])-1; $x>=0; $x--){
-			$this->data['Despesas'][$x]['DataVencimento'] = $this->ConverterDataPadraoBrasileiro($this->data['Despesas'][$x]['DataVencimento'],'%d/%m/%Y');
+			$this->data['Despesas'][$x]['vencimento'] = $this->ConverterDataPadraoBrasileiro($this->data['Despesas'][$x]['vencimento'],'%d/%m/%Y');
 		}
 
 		$this->load->view('PainelGeralView', $data);

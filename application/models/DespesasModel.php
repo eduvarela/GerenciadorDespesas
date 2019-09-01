@@ -6,11 +6,11 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasUsuario($idUsuario)
 	{ 		
-		$this->db->select('des.IdUsuario, cat.Nome AS Categoria, fav.Nome AS Favorecido, des.Pago, des.Valor, des.DataVencimento, fp.Nome as FormaPagamento');
+		$this->db->select('des.IdUsuario, cat.Nome AS Categoria, fav.Nome AS Favorecido, des.status, des.Valor, des.vencimento, fp.Nome as FormaPagamento');
 		$this->db->from('Despesas des');
-		$this->db->join('Favorecidos fav', 'des.IdFavorecido = fav.IdFavorecido', 'inner');
-		$this->db->join('Categorias cat', 'fav.IdCategoria = cat.IdCategoria', 'inner');
-		$this->db->join('FormaPagamento fp', 'des.IdFormaPagamento = fp.IdFormaPagamento', 'inner');
+		$this->db->join('Favorecidos fav', 'des.IdFavorecido = fav.id', 'inner');
+		$this->db->join('Categorias cat', 'des.IdCategoria = cat.id', 'inner');
+		$this->db->join('FormaPagamento fp', 'des.IdFormaPagamento = fp.id', 'inner');
 		$this->db->where_in('des.IdUsuario', $idUsuario);
 		$this->db->limit(20);
 
@@ -21,7 +21,7 @@ class DespesasModel extends CI_Model {
 
 	function listarFavorecidos($id)
 	{ 
-		$this->db->select('fav.IdFavorecido, fav.Nome');
+		$this->db->select('fav.id, fav.Nome');
 		$this->db->from('Favorecidos fav');
 		$this->db->where('fav.IdUsuario', $id); 
 		$query = $this->db->get(); 
@@ -30,7 +30,7 @@ class DespesasModel extends CI_Model {
 
 	function listarFormasPagamento($id)
 	{ 
-		$this->db->select('fp.IdFormaPagamento, fp.Nome');
+		$this->db->select('fp.id, fp.Nome');
 		$this->db->from('FormaPagamento fp');
 		$this->db->where('fp.IdUsuario', $id); 
 		$query = $this->db->get(); 
@@ -41,7 +41,7 @@ class DespesasModel extends CI_Model {
 	{ 
 		$this->db->select('fav.Nome, Count(*) as Valor');
 		$this->db->from('Despesas des');
-		$this->db->join('Favorecidos fav', 'fav.IdFavorecido = des.IdFavorecido', 'inner');
+		$this->db->join('Favorecidos fav', 'fav.id = des.IdFavorecido', 'inner');
 		$this->db->where('des.IdUsuario', $id); 
 		$this->db->group_by("des.IdFavorecido");
 		$query = $this->db->get(); 
@@ -60,7 +60,7 @@ class DespesasModel extends CI_Model {
 	{ 
 		$this->db->select('fp.Nome, Count(*) as Valor');
 		$this->db->from('Despesas des');
-		$this->db->join('FormaPagamento fp', 'fp.IdFormaPagamento = des.IdFormaPagamento', 'inner');
+		$this->db->join('FormaPagamento fp', 'fp.id = des.IdFormaPagamento', 'inner');
 		$this->db->where('des.IdUsuario', $id); 
 		$this->db->group_by("des.IdFormaPagamento");
 		$query = $this->db->get(); 
@@ -74,10 +74,10 @@ class DespesasModel extends CI_Model {
 	{ 
 		$this->db->select('cat.Nome, Count(*) as Valor');
 		$this->db->from('Despesas des');
-		$this->db->join('Favorecidos fav', 'fav.IdFavorecido = des.IdFavorecido', 'inner');
-		$this->db->join('Categorias cat', 'fav.IdCategoria = cat.IdCategoria', 'inner');
+		$this->db->join('Favorecidos fav', 'fav.id = des.IdFavorecido', 'inner');
+		$this->db->join('Categorias cat', 'des.IdCategoria = cat.id', 'inner');
 		$this->db->where('des.IdUsuario', $id); 
-		$this->db->group_by("cat.IdCategoria");
+		$this->db->group_by("cat.id");
 		$query = $this->db->get(); 
 
 
@@ -86,10 +86,10 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasPorPeriodo($id, $periodo)
 	{ 
-		$this->db->select('EXTRACT(MONTH FROM des.DataVencimento) as Nome, SUM(des.Valor) as Valor');
+		$this->db->select('EXTRACT(MONTH FROM des.vencimento) as Nome, Count(*) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->where('des.IdUsuario', $id); 
-		$this->db->where('des.DataVencimento BETWEEN DATE_SUB(NOW(), INTERVAL ' . $periodo. '* 30  DAY) AND NOW()'); 
+		$this->db->where('des.vencimento BETWEEN DATE_SUB(NOW(), INTERVAL ' . $periodo. '* 30  DAY) AND NOW()'); 
 		//$this->db->group_by("EXTRACT(MONTH FROM des.DataVencimento)");
 
 		$query = $this->db->get(); 
@@ -112,7 +112,7 @@ class DespesasModel extends CI_Model {
 			'Pago'  => $pago,
 			'Valor'  => $valor,
 			'Descricao'  => $descricao,
-			'DataVencimento'  => date('Y-m-d',strtotime($this->dateEmMysql($vencimento))),
+			'vencimento'  => date('Y-m-d',strtotime($this->dateEmMysql($vencimento))),
 		);
 
 		$this->db->insert('Despesas', $data);

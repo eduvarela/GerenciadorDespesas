@@ -50,9 +50,9 @@
 							<tr>
 								<td><?php echo $despesa['Categoria']; ?></td>
 								<td><?php echo $despesa['Favorecido']; ?></td>
-								<td><?php echo $despesa['Pago']; ?></td>
+								<td><?php echo $despesa['status']; ?></td>
 								<td>R$ <?php echo $despesa['Valor']; ?></td>
-								<td><?php echo $despesa['DataVencimento']; ?></td>
+								<td><?php echo $despesa['vencimento']; ?></td>
 								<td><?php echo $despesa['FormaPagamento']; ?></td>
 							</tr>
 							<?php } ?>
@@ -77,13 +77,13 @@
 									<select class="form-control col-md-5 mr-2" id="DespesaFavorecido">
 										<option>Favorecido</option>
 										<?php foreach($this->data['Favorecidos'] as $favorecido){ ?>
-										<option id="<?php echo $favorecido['IdFavorecido']; ?>"><?php echo $favorecido['Nome']; ?></option>
+										<option id="<?php echo $favorecido['id']; ?>"><?php echo $favorecido['Nome']; ?></option>
 										<?php } ?>
 									</select>
 									<select class="form-control col-md-6" id="DespesaFormaPagamento">
 										<option>Forma de Pagamento</option>
 										<?php foreach($this->data['FormasPagamento'] as $formapagamento){ ?>
-										<option id="<?php echo $formapagamento['IdFormaPagamento']; ?>"><?php echo $formapagamento['Nome']; ?></option>
+										<option id="<?php echo $formapagamento['id']; ?>"><?php echo $formapagamento['Nome']; ?></option>
 										<?php } ?>
 									</select>
 								</div>
