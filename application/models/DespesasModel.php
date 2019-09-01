@@ -89,11 +89,13 @@ class DespesasModel extends CI_Model {
 		$this->db->select('EXTRACT(MONTH FROM des.vencimento) as Nome, Count(*) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->where('des.IdUsuario', $id); 
-		$this->db->where('des.vencimento BETWEEN DATE_SUB(NOW(), INTERVAL ' . $periodo. '* 30  DAY) AND NOW()'); 
+		$this->db->group_by("EXTRACT(MONTH FROM des.vencimento)");
+
+		// $this->db->where('des.vencimento BETWEEN DATE_SUB(NOW(), INTERVAL ' . $periodo. '* 30  DAY) AND NOW()'); 
 		//$this->db->group_by("EXTRACT(MONTH FROM des.DataVencimento)");
 
 		$query = $this->db->get(); 
-		log_message('error', 'buscarDespesasPorPeriodo[resultado]:' . serialize($query->result_array()));
+		//log_message('error', 'buscarDespesasPorPeriodo[resultado]:' . serialize($query->result_array()));
 
 
 		return $query->result_array();
