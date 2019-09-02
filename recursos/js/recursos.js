@@ -86,7 +86,7 @@ function criarGrafico(elemento, tipo, data){
     data: {
       labels: itens,
       datasets: [{
-        label: 'nº de Despesas',
+        label: 'Valor das despesas',
         data: valores,
         backgroundColor: [
         'rgba(255, 99, 132, 0.2)',

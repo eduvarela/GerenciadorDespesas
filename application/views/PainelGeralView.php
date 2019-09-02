@@ -1,20 +1,26 @@
 				<h1 class="text-dark">Painel Geral</h1>
 
 				<section class="row text-center placeholders text-dark">
-					<div class="col-8 col-sm-4 placeholder">
+					<div class="col placeholder">
 						<canvas id="graficoPorCategorias" width="100" height="100"></canvas>
 						<h4>Categorias</h4>
 						<span class="text-muted">nº de Despesas por Categoria</span>
 					</div>
-					<div class="col-8 col-sm-4 placeholder">
+					<div class="col placeholder">
 						<canvas id="graficoPorFavorecidos" width="100" height="100"></canvas>
 						<h4>Favorecidos</h4>
 						<span class="text-muted">nº de Despesas por Favorecido</span>
 					</div>
-					<div class="col-8 col-sm-4 placeholder">
+					<div class="col placeholder">
 						<canvas id="graficoPorPeriodo" width="100" height="100"></canvas>
 						<h4>Periodo</h4>
 						<span class="text-muted">nº de Despesas por Periodo</span>
+					</div>
+
+					<div class="col placeholder">
+						<canvas id="graficoPorFormaPagamento" width="100" height="100"></canvas>
+						<h4>Forma de Pagamento</h4>
+						<span class="text-muted">nº de Despesas por Forma de Pagamento</span>
 					</div>
 				</section>
 
@@ -172,6 +178,19 @@
 		},
 		error : function(data) {
 			criarGrafico('graficoPorPeriodo', 'bar', data);
+		}
+	});
+
+	$.ajax({
+			type:'POST',
+			dataType : "json",
+			url:'<?php echo base_url("index.php/PainelGeral/estatisticasDespesasPorFormaPagamento"); ?>',
+			success : function(data) {
+			//	alert(data.length);
+			criarGrafico('graficoPorFormaPagamento', 'bar', data);
+		},
+		error : function(data) {
+			criarGrafico('graficoPorFormaPagamento', 'bar', data);
 		}
 	});
 

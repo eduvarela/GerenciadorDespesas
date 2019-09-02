@@ -39,7 +39,7 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasPorFavorecidos($id)
 	{ 
-		$this->db->select('fav.Nome, Count(*) as Valor');
+		$this->db->select('fav.Nome, SUM(des.valor) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->join('Favorecidos fav', 'fav.id = des.IdFavorecido', 'inner');
 		$this->db->where('des.IdUsuario', $id); 
@@ -58,7 +58,7 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasPorFormaPagamento($id)
 	{ 
-		$this->db->select('fp.Nome, Count(*) as Valor');
+		$this->db->select('fp.Nome,  SUM(des.valor) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->join('FormaPagamento fp', 'fp.id = des.IdFormaPagamento', 'inner');
 		$this->db->where('des.IdUsuario', $id); 
@@ -72,7 +72,7 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasPorCategoria($id)
 	{ 
-		$this->db->select('cat.Nome, Count(*) as Valor');
+		$this->db->select('cat.Nome, SUM(des.valor) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->join('Favorecidos fav', 'fav.id = des.IdFavorecido', 'inner');
 		$this->db->join('Categorias cat', 'des.IdCategoria = cat.id', 'inner');
@@ -86,7 +86,7 @@ class DespesasModel extends CI_Model {
 
 	function buscarDespesasPorPeriodo($id, $periodo)
 	{ 
-		$this->db->select('EXTRACT(MONTH FROM des.vencimento) as Nome, Count(*) as Valor');
+		$this->db->select('EXTRACT(MONTH FROM des.vencimento) as Nome, SUM(des.valor) as Valor');
 		$this->db->from('Despesas des');
 		$this->db->where('des.IdUsuario', $id); 
 		$this->db->group_by("EXTRACT(MONTH FROM des.vencimento)");
